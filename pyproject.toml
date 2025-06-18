@@ -1,0 +1,149 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adk-podflow"
+version = "0.1.0"
+description = "AI-powered podcast automation using Google ADK"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "ADK-PodFlow Team", email = "team@adk-podflow.dev"}
+]
+keywords = ["adk", "podcast", "automation", "ai", "google-cloud"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "google-adk>=1.0.0",
+    "openai",
+    "anthropic",
+    "faster-whisper",
+    "sentence-transformers",
+    "python-dotenv",
+    "ffmpeg-python",
+    "google-cloud-speech",
+    "google-cloud-storage",
+    "requests",
+    "beautifulsoup4",
+    "tweepy",
+    "pydub",
+    "torch",
+    "transformers",
+    "PyYAML",
+    "structlog",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio",
+    "pytest-mock",
+    "coverage",
+    "mypy",
+    "black",
+    "ruff",
+    "pre-commit",
+]
+
+[project.urls]
+Homepage = "https://github.com/adk-podflow/adk-podflow"
+Documentation = "https://github.com/adk-podflow/adk-podflow/blob/main/README.md"
+Repository = "https://github.com/adk-podflow/adk-podflow.git"
+"Bug Tracker" = "https://github.com/adk-podflow/adk-podflow/issues"
+
+[project.scripts]
+adk-podflow = "pipelines.full_workflow:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agents*", "pipelines*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.ruff]
+target-version = "py311"
+line-length = 88
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "C901",  # too complex
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.mypy]
+python_version = "3.11"
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+strict_equality = true
+
+[tool.coverage.run]
+source = ["agents", "pipelines"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__init__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if __name__ == .__main__.:",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+asyncio_mode = "auto" 
