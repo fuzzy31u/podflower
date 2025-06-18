@@ -1,6 +1,6 @@
 # Assets Directory
 
-This directory contains audio assets used by the ADK-PodFlow pipeline.
+This directory contains audio assets used by the PodFlower pipeline.
 
 ## Required Files
 

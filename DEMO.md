@@ -1,6 +1,6 @@
-# ADK-PodFlow Demo Guide
+# PodFlower Demo Guide
 
-This guide walks through demonstrating the complete ADK-PodFlow system for the hackathon submission.
+This guide walks through demonstrating the complete PodFlower system for the hackathon submission.
 
 ## Quick Demo (5 minutes)
 
@@ -13,7 +13,7 @@ This guide walks through demonstrating the complete ADK-PodFlow system for the h
 ```bash
 # 1. Setup (30 seconds)
 git clone <repository>
-cd adk-podflow
+cd podflower
 pip install -r requirements.txt
 cp env.example .env
 # Edit .env with your GOOGLE_API_KEY
@@ -32,7 +32,7 @@ python pipelines/full_workflow.py sample_episode/
 
 **Expected Output:**
 ```
-🎉 ADK-PodFlow Pipeline Completed Successfully!
+🎉 PodFlower Pipeline Completed Successfully!
 ============================================================
 📁 Episode Package: build/20241201_episode01/
 🌐 WordPress Post: https://momithub.com/episode-title
@@ -150,7 +150,7 @@ make lint
 ```python
 # Show how SequentialAgent coordinates phases
 main_pipeline = SequentialAgent(
-    name="PodFlowMainPipeline",
+    name="PodFlowerMainPipeline",
     sub_agents=[
         audio_processing_pipeline,    # Sequential
         content_generation_pipeline,  # Parallel
@@ -259,7 +259,7 @@ LOG_LEVEL=DEBUG python pipelines/full_workflow.py sample_episode/
 ## Demo Script for Presentation
 
 1. **Introduction (30 seconds)**
-   - "ADK-PodFlow automates Japanese podcast production with 10 AI agents"
+   - "PodFlower automates Japanese podcast production with 10 AI agents"
    - "From raw recording to social media in one command"
 
 2. **Architecture Overview (60 seconds)**

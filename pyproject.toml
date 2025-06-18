@@ -3,13 +3,13 @@ requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "adk-podflow"
+name = "podflower"
 version = "0.1.0"
 description = "AI-powered podcast automation using Google ADK"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "ADK-PodFlow Team", email = "team@adk-podflow.dev"}
+    {name = "PodFlower Team", email = "team@podflower.dev"}
 ]
 keywords = ["adk", "podcast", "automation", "ai", "google-cloud"]
 classifiers = [
@@ -55,13 +55,13 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/adk-podflow/adk-podflow"
-Documentation = "https://github.com/adk-podflow/adk-podflow/blob/main/README.md"
-Repository = "https://github.com/adk-podflow/adk-podflow.git"
-"Bug Tracker" = "https://github.com/adk-podflow/adk-podflow/issues"
+Homepage = "https://github.com/podflower/podflower"
+Documentation = "https://github.com/podflower/podflower/blob/main/README.md"
+Repository = "https://github.com/podflower/podflower.git"
+"Bug Tracker" = "https://github.com/podflower/podflower/issues"
 
 [project.scripts]
-adk-podflow = "pipelines.full_workflow:main"
+podflower = "pipelines.full_workflow:main"
 
 [tool.setuptools.packages.find]
 where = ["."]

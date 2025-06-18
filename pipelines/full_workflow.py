@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-ADK-PodFlow: Full Workflow Pipeline
+PodFlower: Full Workflow Pipeline
 
 This is the main entry point for the momit.fm podcast automation system.
 Orchestrates all agents in the correct sequence for end-to-end processing.
@@ -60,8 +60,8 @@ structlog.configure(
 logger = structlog.get_logger()
 
 
-class PodFlowPipeline:
-    """ADK-PodFlow main pipeline orchestrator."""
+class PodFlowerPipeline:
+    """PodFlower main pipeline orchestrator."""
     
     def __init__(self, sample_directory: str = "sample_episode/"):
         self.sample_directory = sample_directory
@@ -120,7 +120,7 @@ class PodFlowPipeline:
         
         # Main pipeline orchestration
         main_pipeline = SequentialAgent(
-            name="PodFlowMainPipeline",
+            name="PodFlowerMainPipeline",
             sub_agents=[
                 audio_processing_pipeline,
                 content_generation_pipeline,  # This will wait for audio processing
@@ -133,13 +133,13 @@ class PodFlowPipeline:
     
     async def run(self) -> Dict:
         """Execute the full workflow pipeline."""
-        logger.info("Starting ADK-PodFlow pipeline", 
+        logger.info("Starting PodFlower pipeline", 
                    sample_dir=self.sample_directory)
         
         try:
             # Create session
             session = self.session_service.create_session(
-                app_name="adk-podflow",
+                app_name="podflower",
                 user_id="system",
                 session_id="full_workflow"
             )
@@ -147,7 +147,7 @@ class PodFlowPipeline:
             # Create runner
             runner = Runner(
                 agent=self.main_pipeline,
-                app_name="adk-podflow",
+                app_name="podflower",
                 session_service=self.session_service
             )
             
@@ -218,12 +218,12 @@ async def main():
     # Parse command line arguments
     sample_dir = sys.argv[1] if len(sys.argv) > 1 else "sample_episode/"
     
-    logger.info("ADK-PodFlow Starting", 
+    logger.info("PodFlower Starting", 
                version="0.1.0",
                sample_directory=sample_dir)
     
     # Create pipeline
-    pipeline = PodFlowPipeline(sample_directory=sample_dir)
+    pipeline = PodFlowerPipeline(sample_directory=sample_dir)
     
     # Validate prerequisites
     if not pipeline.validate_prerequisites():
@@ -236,7 +236,7 @@ async def main():
         
         # Print summary
         print("\n" + "="*60)
-        print("🎉 ADK-PodFlow Pipeline Completed Successfully!")
+        print("🎉 PodFlower Pipeline Completed Successfully!")
         print("="*60)
         print(f"📁 Episode Package: {result.get('episode_package_dir', 'N/A')}")
         print(f"🌐 WordPress Post: {result.get('wordpress_post_url', 'N/A')}")

@@ -1,6 +1,6 @@
 # Sample Episode Directory
 
-This directory contains sample audio files for testing the ADK-PodFlow pipeline.
+This directory contains sample audio files for testing the PodFlower pipeline.
 
 ## Required Files
 

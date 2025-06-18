@@ -1,5 +1,5 @@
 """
-Unit Tests for Individual ADK-PodFlow Agents
+Unit Tests for Individual PodFlower Agents
 
 Tests each agent's functionality in isolation with mocked dependencies.
 """

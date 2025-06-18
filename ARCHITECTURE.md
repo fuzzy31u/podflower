@@ -1,8 +1,8 @@
-# ADK-PodFlow Architecture
+# PodFlower Architecture
 
 ## Overview
 
-ADK-PodFlow demonstrates sophisticated multi-agent orchestration using Google's Agent Development Kit (ADK) to automate Japanese podcast production workflows. The system showcases all three ADK agent families working together to solve complex, real-world automation challenges.
+PodFlower demonstrates sophisticated multi-agent orchestration using Google's Agent Development Kit (ADK) to automate Japanese podcast production workflows. The system showcases all three ADK agent families working together to solve complex, real-world automation challenges.
 
 ## Core Design Principles
 

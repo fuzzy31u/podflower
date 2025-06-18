@@ -1,10 +1,10 @@
-# ADK-PodFlow Makefile
+# PodFlower Makefile
 
 .PHONY: help install format lint test bench run clean
 
 # Default target
 help:
-	@echo "ADK-PodFlow Development Commands"
+	@echo "PodFlower Development Commands"
 	@echo "==============================="
 	@echo ""
 	@echo "Setup:"
@@ -35,7 +35,7 @@ help:
 # =============================================================================
 
 install:
-	@echo "Installing ADK-PodFlow dependencies..."
+	@echo "Installing PodFlower dependencies..."
 	pip install -r requirements.txt
 	@echo "✅ Dependencies installed"
 
@@ -96,11 +96,11 @@ bench:
 # =============================================================================
 
 run:
-	@echo "Running ADK-PodFlow pipeline..."
+	@echo "Running PodFlower pipeline..."
 	python pipelines/full_workflow.py sample_episode/
 
 demo:
-	@echo "Running ADK-PodFlow demo with verbose output..."
+	@echo "Running PodFlower demo with verbose output..."
 	LOG_LEVEL=DEBUG python pipelines/full_workflow.py sample_episode/
 
 # =============================================================================
@@ -131,12 +131,12 @@ deps-update:
 
 docker-build:
 	@echo "Building Docker image..."
-	docker build -t adk-podflow:latest .
+	docker build -t podflower:latest .
 	@echo "✅ Docker image built"
 
 docker-run:
-	@echo "Running ADK-PodFlow in Docker..."
-	docker run --rm -v $(PWD)/sample_episode:/app/sample_episode -v $(PWD)/assets:/app/assets --env-file .env adk-podflow:latest
+	@echo "Running PodFlower in Docker..."
+	docker run --rm -v $(PWD)/sample_episode:/app/sample_episode -v $(PWD)/assets:/app/assets --env-file .env podflower:latest
 	@echo "✅ Docker execution completed"
 
 # =============================================================================

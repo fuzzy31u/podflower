@@ -1,10 +1,10 @@
-# ADK-PodFlow: AI-Powered Podcast Automation 🎙️
+# PodFlower: AI-Powered Podcast Automation 🎙️
 
 [![ADK Hackathon](https://img.shields.io/badge/ADK-Hackathon%202025-blue)](https://googlecloudmultiagents.devpost.com/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Google ADK](https://img.shields.io/badge/Google-ADK%201.0.0-green)](https://google.github.io/adk-docs/)
 
-**ADK-PodFlow** is a sophisticated multi-agent system built with Google's Agent Development Kit (ADK) that automates the complete end-to-end workflow for Japanese podcast production. From raw audio processing to social media distribution, this system demonstrates the power of AI agent orchestration in solving real-world automation challenges.
+**PodFlower** is a sophisticated multi-agent system built with Google's Agent Development Kit (ADK) that automates the complete end-to-end workflow for Japanese podcast production. From raw audio processing to social media distribution, this system demonstrates the power of AI agent orchestration in solving real-world automation challenges.
 
 ## 🎯 Hackathon Submission
 
@@ -26,7 +26,7 @@ This single command processes a complete podcast episode with **zero manual inte
 
 ## 🏗️ Architecture
 
-ADK-PodFlow uses **10 specialized agents** orchestrated through ADK's workflow patterns:
+PodFlower uses **10 specialized agents** orchestrated through ADK's workflow patterns:
 
 ```mermaid
 graph TB
@@ -65,7 +65,7 @@ graph TB
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd adk-podflow
+cd podflower
 
 # Install dependencies
 make install
@@ -92,7 +92,7 @@ X_CONSUMER_KEY=your_x_api_key
 ## 📁 Project Structure
 
 ```
-adk-podflow/
+podflower/
 ├── agents/                  # All ADK agents
 │   ├── recorder/           # Audio file detection
 │   ├── filler_removal/     # Japanese filler word removal
@@ -218,7 +218,7 @@ See [deployment documentation](https://google.github.io/adk-docs/deploy/agent-en
 
 ## 🤝 Contributing
 
-We welcome contributions to ADK-PodFlow! This project demonstrates advanced ADK patterns and could serve as a reference implementation for:
+We welcome contributions to PodFlower! This project demonstrates advanced ADK patterns and could serve as a reference implementation for:
 
 - Multi-agent workflow orchestration
 - Language-specific AI processing pipelines  

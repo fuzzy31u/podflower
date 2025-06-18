@@ -1,5 +1,5 @@
 """
-End-to-End Pipeline Tests for ADK-PodFlow
+End-to-End Pipeline Tests for PodFlower
 
 Tests the complete pipeline functionality using sample data.
 """
@@ -16,10 +16,10 @@ import shutil
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from pipelines.full_workflow import PodFlowPipeline
+from pipelines.full_workflow import PodFlowerPipeline
 
 
-class TestPodFlowPipeline:
+class TestPodFlowerPipeline:
     """End-to-end pipeline tests."""
     
     @pytest.fixture
@@ -65,7 +65,7 @@ class TestPodFlowPipeline:
     
     def test_pipeline_initialization(self, temp_sample_dir, mock_env_vars):
         """Test that pipeline initializes correctly."""
-        pipeline = PodFlowPipeline(sample_directory=temp_sample_dir)
+        pipeline = PodFlowerPipeline(sample_directory=temp_sample_dir)
         
         assert pipeline.sample_directory == temp_sample_dir
         assert pipeline.recorder_agent is not None
@@ -74,14 +74,14 @@ class TestPodFlowPipeline:
     
     def test_prerequisites_validation_success(self, temp_sample_dir, mock_env_vars):
         """Test prerequisites validation with valid setup."""
-        pipeline = PodFlowPipeline(sample_directory=temp_sample_dir)
+        pipeline = PodFlowerPipeline(sample_directory=temp_sample_dir)
         
         result = pipeline.validate_prerequisites()
         assert result is True
     
     def test_prerequisites_validation_missing_directory(self, mock_env_vars):
         """Test prerequisites validation fails with missing directory."""
-        pipeline = PodFlowPipeline(sample_directory="nonexistent_dir")
+        pipeline = PodFlowerPipeline(sample_directory="nonexistent_dir")
         
         result = pipeline.validate_prerequisites()
         assert result is False
@@ -92,13 +92,13 @@ class TestPodFlowPipeline:
             empty_dir = Path(temp_dir) / "empty_episode"
             empty_dir.mkdir()
             
-            pipeline = PodFlowPipeline(sample_directory=str(empty_dir))
+            pipeline = PodFlowerPipeline(sample_directory=str(empty_dir))
             result = pipeline.validate_prerequisites()
             assert result is False
     
     def test_prerequisites_validation_missing_env_vars(self, temp_sample_dir):
         """Test prerequisites validation fails with missing env vars."""
-        pipeline = PodFlowPipeline(sample_directory=temp_sample_dir)
+        pipeline = PodFlowerPipeline(sample_directory=temp_sample_dir)
         
         result = pipeline.validate_prerequisites()
         assert result is False
@@ -187,7 +187,7 @@ class TestPodFlowPipeline:
         }
         
         # Execute pipeline
-        pipeline = PodFlowPipeline(sample_directory=temp_sample_dir)
+        pipeline = PodFlowerPipeline(sample_directory=temp_sample_dir)
         result = await pipeline.run()
         
         # Verify all agents were called
@@ -216,7 +216,7 @@ class TestPodFlowPipeline:
             # Make recorder agent fail
             mock_recorder.side_effect = Exception("Recorder failed")
             
-            pipeline = PodFlowPipeline(sample_directory=temp_sample_dir)
+            pipeline = PodFlowerPipeline(sample_directory=temp_sample_dir)
             
             with pytest.raises(Exception) as exc_info:
                 await pipeline.run()
@@ -225,11 +225,11 @@ class TestPodFlowPipeline:
     
     def test_pipeline_state_flow(self, temp_sample_dir, mock_env_vars):
         """Test that pipeline maintains proper state flow between agents."""
-        pipeline = PodFlowPipeline(sample_directory=temp_sample_dir)
+        pipeline = PodFlowerPipeline(sample_directory=temp_sample_dir)
         
         # Verify agents are properly connected in sequence
         main_pipeline = pipeline.main_pipeline
-        assert main_pipeline.name == "PodFlowMainPipeline"
+        assert main_pipeline.name == "PodFlowerMainPipeline"
         
         # Check that sub-agents are properly configured
         sub_agents = main_pipeline.sub_agents
@@ -250,7 +250,7 @@ class TestPodFlowPipeline:
         # This test verifies that the system can be run with a single command
         # as specified in the SPEC: `python pipelines/full_workflow.py sample_episode/`
         
-        pipeline = PodFlowPipeline(sample_directory=temp_sample_dir)
+        pipeline = PodFlowerPipeline(sample_directory=temp_sample_dir)
         
         # Verify prerequisites can be validated
         assert pipeline.validate_prerequisites() is True
