@@ -1,0 +1,34 @@
+---
+description: Read the spec
+globs: 
+alwaysApply: false
+---
+Always read following materials,
+* Hackathon:
+  * Overview: https://googlecloudmultiagents.devpost.com/
+  * Resources: https://googlecloudmultiagents.devpost.com/resources
+  * Rules: https://googlecloudmultiagents.devpost.com/rules
+  * Updates: https://googlecloudmultiagents.devpost.com/updates
+  * Discussions: https://googlecloudmultiagents.devpost.com/forum_topics
+* ADK(AI Development Kit) document: 
+  * https://google.github.io/adk-docs/
+  * Agents:
+    - https://google.github.io/adk-docs/agents/
+    - https://google.github.io/adk-docs/agents/llm-agents/
+    - https://google.github.io/adk-docs/agents/workflow-agents/
+    - https://google.github.io/adk-docs/agents/workflow-agents/sequential-agents/
+    - https://google.github.io/adk-docs/agents/workflow-agents/parallel-agents/
+    - https://google.github.io/adk-docs/agents/workflow-agents/loop-agents/
+    - https://google.github.io/adk-docs/agents/custom-agents/
+  * Tools:
+    - https://google.github.io/adk-docs/tools/function-tools/    
+    - https://google.github.io/adk-docs/tools/built-in-tools/
+    - https://google.github.io/adk-docs/tools/third-party-tools/
+    - https://google.github.io/adk-docs/tools/google-cloud-tools/
+    - https://google.github.io/adk-docs/tools/mcp-tools/
+    - https://google.github.io/adk-docs/tools/openapi-tools/
+    - https://google.github.io/adk-docs/tools/authentication/
+  * Running Agent:
+    - https://google.github.io/adk-docs/runtime/#core-idea-the-event-loop
+  * Deploy:
+    - https://google.github.io/adk-docs/deploy/agent-engine/

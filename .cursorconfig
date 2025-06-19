@@ -1,0 +1,14 @@
+{
+  "model": "claude-4-sonnet",
+  "mode": "MAX",
+  "blockLargeDiff": true,
+  "tabSize": 4,
+  "rules": [
+    "Follow SPEC.md contracts exactly",
+    "Use type annotations everywhere",
+    "Prefer async/await for I/O operations",
+    "Use structlog for logging with PII redaction",
+    "Raise AgentError for recoverable failures",
+    "Each agent must implement the BaseAgent contract"
+  ]
+} 

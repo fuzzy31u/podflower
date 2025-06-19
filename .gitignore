@@ -1,0 +1,57 @@
+# PodFlower - Minimal .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+
+# Virtual Environment
+.env
+.venv/
+venv/
+env/
+
+# Environment Variables & Secrets
+.env.*
+*.pem
+*.key
+service-account.json
+credentials.json
+
+# Audio Files (Generated)
+*.mp3
+*.mp4
+*.wav
+*.m4a
+!sample_episode/raw_audio.mp4
+!sample_episode/guest_track.mp4
+!assets/intro.mp3
+!assets/outro.mp3
+
+# Build & Output Directories
+build/
+output/
+exports/
+
+# Development
+.DS_Store
+*.log
+.mypy_cache/
+.pytest_cache/
+.coverage
+
+# ADK/Agent Artifacts
+.adk/
+agent_logs/
+session_data/
+
+# Cursor IDE - Keep rules, ignore cache
+.cursor/logs/
+.cursor/cache/
+!.cursor/rules/ 
