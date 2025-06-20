@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from google.adk.agents import SequentialAgent, ParallelAgent
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
+from google.adk.models.llm_request import LlmRequest
 
 # Import all our agents
 from agents.recorder.recorder import Agent as RecorderAgent
@@ -137,35 +138,81 @@ class PodFlowerPipeline:
                    sample_dir=self.sample_directory)
         
         try:
-            # Create session
-            session = self.session_service.create_session(
-                app_name="podflower",
-                user_id="system",
-                session_id="full_workflow"
-            )
+            # Initialize pipeline state
+            state = {}
             
-            # Create runner
-            runner = Runner(
-                agent=self.main_pipeline,
-                app_name="podflower",
-                session_service=self.session_service
-            )
+            logger.info("Phase 1: Audio Processing")
             
-            # Execute pipeline
-            logger.info("Executing pipeline...")
+            # Phase 1: Core Audio Processing (Sequential)
+            result = await self.recorder_agent.run(state)
+            state.update(result)
+            logger.info("✅ Recorder completed", files=state.get("audio_raw_paths"))
             
-            # Initialize empty state
-            initial_state = {}
+            result = await self.filler_removal_agent.run(state)
+            state.update(result)
+            logger.info("✅ Filler removal completed", 
+                       clean_audio=state.get("audio_clean_path"),
+                       transcript_length=len(state.get("transcript", "")),
+                       state_keys=list(state.keys()))
             
-            # Run the pipeline
-            result = await self.main_pipeline.run(initial_state)
+            result = await self.concat_audio_agent.run(state)
+            state.update(result)
+            logger.info("✅ Audio concatenation completed", with_intro_outro=state.get("audio_with_intro_outro"))
+            
+            result = await self.mastering_agent.run(state)
+            state.update(result)
+            logger.info("✅ Audio mastering completed", mastered_audio=state.get("audio_mastered_path"))
+            
+            logger.info("Phase 2: Content Generation")
+            
+            # Phase 2: Content Generation (can run in parallel)
+            # For now, run sequentially for simplicity
+            result = await self.title_notes_agent.run(state)
+            state.update(result)
+            logger.info("✅ Title/notes generation completed", title=state.get("episode_title"))
+            
+            result = await self.ad_break_agent.run(state)
+            state.update(result)
+            logger.info("✅ Ad break analysis completed", ad_breaks=len(state.get("ad_break_timestamps", [])))
+            
+            logger.info("Phase 3: Package Creation")
+            
+            # Phase 3: Package Creation
+            result = await self.export_package_agent.run(state)
+            state.update(result)
+            logger.info("✅ Episode package created", package_dir=state.get("episode_package_dir"))
+            
+            logger.info("Phase 4: Distribution")
+            
+            # Phase 4: Distribution (can run in parallel)
+            # For now, run sequentially for simplicity
+            try:
+                result = await self.deploy_vercel_agent.run(state)
+                state.update(result)
+                logger.info("✅ Vercel deployment completed", url=state.get("vercel_deployment_url"))
+            except Exception as e:
+                logger.warning("Vercel deployment failed", error=str(e))
+                
+            try:
+                result = await self.wordpress_publish_agent.run(state)
+                state.update(result)
+                logger.info("✅ WordPress publishing completed", url=state.get("wordpress_post_url"))
+            except Exception as e:
+                logger.warning("WordPress publishing failed", error=str(e))
+                
+            try:
+                result = await self.post_to_x_agent.run(state)
+                state.update(result)
+                logger.info("✅ X posting completed", url=state.get("x_tweet_url"))
+            except Exception as e:
+                logger.warning("X posting failed", error=str(e))
             
             logger.info("Pipeline completed successfully", 
-                       episode_package=result.get("episode_package_dir"),
-                       wordpress_url=result.get("wordpress_post_url"),
-                       tweet_url=result.get("x_tweet_url"))
+                       episode_package=state.get("episode_package_dir"),
+                       wordpress_url=state.get("wordpress_post_url"),
+                       tweet_url=state.get("x_tweet_url"))
             
-            return result
+            return state
             
         except Exception as e:
             logger.error("Pipeline failed", error=str(e), exc_info=True)

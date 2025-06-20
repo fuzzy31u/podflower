@@ -3,7 +3,7 @@
 import os
 import asyncio
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, ClassVar
 import structlog
 from google.adk.agents import BaseAgent
 
@@ -18,14 +18,15 @@ class AgentError(Exception):
 class Agent(BaseAgent):
     """Recorder Agent - see SPEC.md for full contract."""
     
-    name = "recorder"
-    description = "Watch folder and detect new Zoom/Riverside raw tracks"
-    version = "0.1.0"
+    name: str = "recorder"
+    description: str = "Watch folder and detect new Zoom/Riverside raw tracks"
+    version: str = "0.1.0"
     
-    def __init__(self, watch_directory: str = "sample_episode/"):
-        super().__init__()
-        self.watch_directory = Path(watch_directory)
-        self.processed_files = set()
+    def __init__(self, watch_directory: str = "sample_episode/", **kwargs):
+        super().__init__(**kwargs)
+        # Use object.__setattr__ to bypass Pydantic's field validation
+        object.__setattr__(self, 'watch_directory', Path(watch_directory))
+        object.__setattr__(self, 'processed_files', set())
         
     async def run(self, state: Dict) -> Dict:
         """Watch directory for new audio tracks and add to state.

@@ -2,7 +2,7 @@
 
 import os
 import subprocess
-from typing import Dict
+from typing import Dict, ClassVar
 import structlog
 from google.adk.agents import BaseAgent
 
@@ -16,14 +16,13 @@ class AgentError(Exception):
 
 class Agent(BaseAgent):
     """Deploy Vercel Agent - see SPEC.md for full contract."""
+    name: str = "deploy_vercel"
+    description: str = "Trigger Vercel deployment for hub.momit.fm"
+    version: str = "0.1.0"
     
-    name = "deploy_vercel"
-    description = "Trigger Vercel deployment for hub.momit.fm"
-    version = "0.1.0"
-    
-    def __init__(self, repo_path: str = "hub.momit.fm"):
-        super().__init__()
-        self.repo_path = repo_path
+    def __init__(self, repo_path: str = "hub.momit.fm", **kwargs):
+        super().__init__(**kwargs)
+        object.__setattr__(self, 'repo_path', repo_path)
         
     async def run(self, state: Dict) -> Dict:
         """Trigger Vercel production deployment.

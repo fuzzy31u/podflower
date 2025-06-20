@@ -1,7 +1,7 @@
 """Ad-Break Detector Agent - Detect topic-shift ad points."""
 
 import math
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, ClassVar
 import structlog
 import numpy as np
 from sentence_transformers import SentenceTransformer
@@ -18,15 +18,14 @@ class AgentError(Exception):
 
 class Agent(BaseAgent):
     """Ad Break Detector Agent - see SPEC.md for full contract."""
+    name: str = "ad_break"
+    description: str = "Detect topic-shift points for ad placement using semantic similarity"
+    version: str = "0.1.0"
     
-    name = "ad_break"
-    description = "Detect topic-shift points for ad placement using semantic similarity"
-    version = "0.1.0"
-    
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # Load multilingual sentence transformer for Japanese text
-        self.model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2')
+        object.__setattr__(self, 'model', SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2'))
         
     async def run(self, state: Dict) -> Dict:
         """Detect ad break points based on topic shifts.

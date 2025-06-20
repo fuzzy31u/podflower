@@ -1,7 +1,7 @@
 """X Post Agent - Post announcement tweet."""
 
 import os
-from typing import Dict
+from typing import Dict, ClassVar
 import structlog
 import tweepy
 from google.adk.agents import BaseAgent
@@ -16,19 +16,18 @@ class AgentError(Exception):
 
 class Agent(BaseAgent):
     """X Post Agent - see SPEC.md for full contract."""
+    name: str = "post_to_x"
+    description: str = "Post episode announcement to X (Twitter)"
+    version: str = "0.1.0"
     
-    name = "post_to_x"
-    description = "Post episode announcement to X (Twitter)"
-    version = "0.1.0"
-    
-    def __init__(self):
-        super().__init__()
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         # X API credentials
-        self.consumer_key = os.getenv("X_CONSUMER_KEY")
-        self.consumer_secret = os.getenv("X_CONSUMER_SECRET")
-        self.access_token = os.getenv("X_ACCESS_TOKEN")
-        self.access_token_secret = os.getenv("X_ACCESS_TOKEN_SECRET")
-        self.bearer_token = os.getenv("X_BEARER_TOKEN")
+        object.__setattr__(self, 'consumer_key', os.getenv("X_CONSUMER_KEY"))
+        object.__setattr__(self, 'consumer_secret', os.getenv("X_CONSUMER_SECRET"))
+        object.__setattr__(self, 'access_token', os.getenv("X_ACCESS_TOKEN"))
+        object.__setattr__(self, 'access_token_secret', os.getenv("X_ACCESS_TOKEN_SECRET"))
+        object.__setattr__(self, 'bearer_token', os.getenv("X_BEARER_TOKEN"))
         
     async def run(self, state: Dict) -> Dict:
         """Post episode announcement to X.

@@ -2,7 +2,7 @@
 
 import os
 import requests
-from typing import Dict, Optional
+from typing import Dict, Optional, ClassVar
 import structlog
 from google.adk.agents import BaseAgent
 
@@ -16,17 +16,16 @@ class AgentError(Exception):
 
 class Agent(BaseAgent):
     """WordPress Publisher Agent - see SPEC.md for full contract."""
+    name: str = "wordpress_publish"
+    description: str = "Publish show notes to WordPress with featured image from Unsplash"
+    version: str = "0.1.0"
     
-    name = "wordpress_publish"
-    description = "Publish show notes to WordPress with featured image from Unsplash"
-    version = "0.1.0"
-    
-    def __init__(self):
-        super().__init__()
-        self.wp_base_url = os.getenv("WORDPRESS_BASE_URL", "https://momithub.com")
-        self.wp_username = os.getenv("WORDPRESS_USERNAME")
-        self.wp_password = os.getenv("WORDPRESS_APP_PASSWORD")
-        self.unsplash_access_key = os.getenv("UNSPLASH_ACCESS_KEY")
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        object.__setattr__(self, 'wp_base_url', os.getenv("WORDPRESS_BASE_URL", "https://momithub.com"))
+        object.__setattr__(self, 'wp_username', os.getenv("WORDPRESS_USERNAME"))
+        object.__setattr__(self, 'wp_password', os.getenv("WORDPRESS_APP_PASSWORD"))
+        object.__setattr__(self, 'unsplash_access_key', os.getenv("UNSPLASH_ACCESS_KEY"))
         
     async def run(self, state: Dict) -> Dict:
         """Publish episode to WordPress.

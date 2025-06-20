@@ -2,7 +2,7 @@
 
 import os
 from pathlib import Path
-from typing import Dict
+from typing import Dict, ClassVar
 import structlog
 from google.adk.agents import BaseAgent
 import ffmpeg
@@ -17,14 +17,13 @@ class AgentError(Exception):
 
 class Agent(BaseAgent):
     """Concat Audio Agent - see SPEC.md for full contract."""
+    name: str = "concat_audio"
+    description: str = "Prepend intro.mp3 and append outro.mp3 to clean audio"
+    version: str = "0.1.0"
     
-    name = "concat_audio"
-    description = "Prepend intro.mp3 and append outro.mp3 to clean audio"
-    version = "0.1.0"
-    
-    def __init__(self, assets_dir: str = "assets/"):
-        super().__init__()
-        self.assets_dir = Path(assets_dir)
+    def __init__(self, assets_dir: str = "assets/", **kwargs):
+        super().__init__(**kwargs)
+        object.__setattr__(self, 'assets_dir', Path(assets_dir))
         
     async def run(self, state: Dict) -> Dict:
         """Prepend intro and append outro to clean audio.

@@ -5,7 +5,7 @@ import json
 import hashlib
 from datetime import datetime
 from pathlib import Path
-from typing import Dict
+from typing import Dict, ClassVar
 import structlog
 from google.adk.agents import BaseAgent
 import ffmpeg
@@ -20,14 +20,13 @@ class AgentError(Exception):
 
 class Agent(BaseAgent):
     """Export Package Agent - see SPEC.md for full contract."""
+    name: str = "export_package"
+    description: str = "Create final episode package with audio, metadata, and show notes"
+    version: str = "0.1.0"
     
-    name = "export_package"
-    description = "Create final episode package with audio, metadata, and show notes"
-    version = "0.1.0"
-    
-    def __init__(self, build_dir: str = "build/"):
-        super().__init__()
-        self.build_dir = Path(build_dir)
+    def __init__(self, build_dir: str = "build/", **kwargs):
+        super().__init__(**kwargs)
+        object.__setattr__(self, 'build_dir', Path(build_dir))
         
     async def run(self, state: Dict) -> Dict:
         """Create final episode package.

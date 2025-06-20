@@ -1,7 +1,7 @@
 """Title & Show-note Generator Agent - Generate JP titles & show notes."""
 
 import json
-from typing import Dict, List
+from typing import Dict, List, ClassVar
 import structlog
 from google.adk.agents import LlmAgent
 
@@ -15,12 +15,11 @@ class AgentError(Exception):
 
 class Agent(LlmAgent):
     """Title Notes Agent - see SPEC.md for full contract."""
+    name: str = "title_notes"
+    description: str = "Generate Japanese titles and markdown show notes using LLM"
+    version: str = "0.1.0"
     
-    name = "title_notes"
-    description = "Generate Japanese titles and markdown show notes using LLM"
-    version = "0.1.0"
-    
-    def __init__(self):
+    def __init__(self, **kwargs):
         super().__init__(
             model="gemini-2.0-flash",
             instruction="""あなたは日本のポッドキャスト「momit.fm」の編集者です。
