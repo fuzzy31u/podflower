@@ -34,8 +34,9 @@ def check_deployments():
             if "PodFlower" in (engine.display_name or ""):
                 print(f"🧪 Testing {engine.display_name}...")
                 try:
-                    response = engine.query(
-                        input={"episode_directory": "sample_episode/"}
+                    # Use the correct predict method for reasoning engines
+                    response = engine.predict(
+                        input_data={"episode_directory": "sample_episode/"}
                     )
                     print(f"✅ Test successful: {response.get('status', 'unknown')}")
                     if response.get('status') == 'success':
