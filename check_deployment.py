@@ -34,13 +34,25 @@ def check_deployments():
             if "PodFlower" in (engine.display_name or ""):
                 print(f"🧪 Testing {engine.display_name}...")
                 try:
-                    # Use the correct predict method for reasoning engines
-                    response = engine.predict(
+                    # Create a remote client for the deployed engine
+                    remote_engine = reasoning_engines.ReasoningEngine(engine.resource_name)
+                    
+                    # Query the deployed engine
+                    response = remote_engine.query(
                         input_data={"episode_directory": "sample_episode/"}
                     )
-                    print(f"✅ Test successful: {response.get('status', 'unknown')}")
-                    if response.get('status') == 'success':
+                    status = response.get('status', 'unknown')
+                    print(f"📊 Test result: {status}")
+                    
+                    if status == 'success':
+                        print(f"✅ Pipeline completed successfully!")
                         print(f"📁 Episode package: {response.get('episode_package', 'N/A')}")
+                        print(f"🌐 WordPress URL: {response.get('wordpress_url', 'N/A')}")
+                        print(f"🐦 X Tweet URL: {response.get('x_tweet_url', 'N/A')}")
+                        print(f"⚡ Vercel URL: {response.get('vercel_url', 'N/A')}")
+                    else:
+                        print(f"❌ Pipeline failed: {response.get('message', 'Unknown error')}")
+                        print(f"🔍 Error type: {response.get('error_type', 'Unknown')}")
                 except Exception as e:
                     print(f"❌ Test failed: {e}")
                 print()
