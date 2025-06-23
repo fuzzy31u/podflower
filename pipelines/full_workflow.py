@@ -38,7 +38,7 @@ from agents.wordpress_publish.wordpress_publish import Agent as WordPressPublish
 from agents.post_to_x.post_to_x import Agent as PostToXAgent
 
 # Load environment variables
-load_dotenv()
+load_dotenv('.env', override=True)
 
 # Configure structured logging
 structlog.configure(
