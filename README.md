@@ -1,14 +1,13 @@
 # PodFlower: AI-Powered Podcast Automation 🎙️
 
-[![ADK Hackathon](https://img.shields.io/badge/ADK-Hackathon%202025-blue)](https://googlecloudmultiagents.devpost.com/)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Google ADK](https://img.shields.io/badge/Google-ADK%201.0.0-green)](https://google.github.io/adk-docs/)
 
 **PodFlower** is a sophisticated multi-agent system built with Google's Agent Development Kit (ADK) that automates the complete end-to-end workflow for Japanese podcast production. From raw audio processing to social media distribution, this system demonstrates the power of AI agent orchestration in solving real-world automation challenges.
 
-## 🎯 Hackathon Submission
+## 🎯 System Overview
 
-This project is submitted to the **Agent Development Kit Hackathon with Google Cloud** in the **"Automation of Complex Processes"** category. It showcases:
+This project showcases:
 
 - ✅ **Multi-agent orchestration** using ADK Workflow Agents
 - ✅ **Complex process automation** with 10 specialized agents
@@ -191,27 +190,27 @@ make docker-run
 ### Production (with ADK Agent Engine)
 See [deployment documentation](https://google.github.io/adk-docs/deploy/agent-engine/) for cloud deployment options.
 
-## 🏆 Hackathon Highlights
+## 🏆 Key Features
 
-### Technical Innovation (50%)
+### Technical Innovation
 - **Multi-agent orchestration** using all three ADK agent types
 - **Language-specific AI processing** for Japanese content  
 - **Real-time audio DSP** with professional mastering
 - **Clean, typed, well-documented code** following SPEC
 
-### Creativity & Impact (30%)
+### Creativity & Impact
 - **Solves real workflow pain** for Japanese podcast creators
 - **Zero-touch automation** from recording to social media
 - **Cultural adaptation** for Japanese language nuances
 - **Professional audio quality** matching industry standards
 
-### Demo & Documentation (20%)
-- **One-command demo** as specified: `python pipelines/full_workflow.py sample_episode/`
+### Demo & Documentation
+- **One-command demo**: `python pipelines/full_workflow.py sample_episode/`
 - **Comprehensive documentation** with clear setup instructions
 - **Complete test coverage** including end-to-end pipeline tests
 - **Architecture diagrams** showing agent orchestration
 
-### Bonus Points
+### Additional Benefits
 - ✅ **ADK contribution potential** - demonstrates advanced agent patterns
 - ✅ **Google Cloud integration** - Speech-to-Text, Storage, potential Vertex AI
 - ✅ **Production-ready** - error handling, logging, monitoring
@@ -227,15 +226,14 @@ We welcome contributions to PodFlower! This project demonstrates advanced ADK pa
 
 ## 📜 License
 
-This project is submitted to the ADK Hackathon and is intended as a demonstration of ADK capabilities for automating complex, real-world workflows.
+This project is intended as a demonstration of ADK capabilities for automating complex, real-world workflows.
 
 ## 🔗 Links
 
 - **ADK Documentation**: https://google.github.io/adk-docs/
-- **Hackathon Page**: https://googlecloudmultiagents.devpost.com/
 - **Demo Video**: [Coming soon]
 - **Architecture Blog**: [Coming soon]
 
 ---
 
-Built with ❤️ for the ADK Hackathon by demonstrating the power of AI agent collaboration in solving real-world automation challenges. **#ADKHackathon** 
+Built with ❤️ to demonstrate the power of AI agent collaboration in solving real-world automation challenges. 

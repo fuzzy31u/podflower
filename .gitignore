@@ -54,4 +54,5 @@ session_data/
 # Cursor IDE - Keep rules, ignore cache
 .cursor/logs/
 .cursor/cache/
-!.cursor/rules/ 
+!.cursor/rules/
+.cursor/rules/my-custom-rules.mdc 

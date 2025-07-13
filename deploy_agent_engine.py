@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 # Configuration
 PROJECT_ID = "adk-hackathon-dev"  # Your Google Cloud Project ID
 LOCATION = "us-central1"  # Supported regions: us-central1, us-east1, europe-west1
-STAGING_BUCKET = "gs://podflower-staging-adk-hackathon"  # Your GCS bucket
+STAGING_BUCKET = "gs://podflower-staging-adk-dev"  # Your GCS bucket
 
 class PodFlowerReasoningEngine:
     """
@@ -102,7 +102,7 @@ def deploy_podflower():
                 "numpy>=1.21.0",
                 "deprecated>=1.2.0"
             ],
-            display_name="PodFlower-ADK-Hackathon",
+            display_name="PodFlower-ADK-Production",
             description="End-to-end Japanese podcast automation system using ADK multi-agent workflow"
         )
         
@@ -138,11 +138,11 @@ if __name__ == "__main__":
     if remote_app:
         print("\n🎉 PodFlower is now live on Agent Engine!")
         print("📋 Next steps:")
-        print("1. Use this resource name for your hackathon submission:")
+        print("1. Use this resource name for your deployment:")
         print(f"   {remote_app.resource_name}")
         print("2. Test your deployment with the Agent Engine API")
         print("3. Record your demo video showing the live system")
-        print("\n📝 Save this info for your submission:")
+        print("\n📝 Save this info for your deployment:")
         print(f"   Project ID: {PROJECT_ID}")
         print(f"   Location: {LOCATION}")
         print(f"   Resource Name: {remote_app.resource_name}")

@@ -1,6 +1,6 @@
 # PodFlower Demo Guide
 
-This guide walks through demonstrating the complete PodFlower system for the hackathon submission.
+This guide walks through demonstrating the complete PodFlower system.
 
 ## Quick Demo (5 minutes)
 
