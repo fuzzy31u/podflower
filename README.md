@@ -1,6 +1,6 @@
 # PodFlower: AI-Powered Podcast Automation 🎙️
 
-![PodFlower Key Visual](./assets/podflower.png)
+<img src="./assets/podflower.png" alt="PodFlower Key Visual" width="400">
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Google ADK](https://img.shields.io/badge/Google-ADK%201.0.0-green)](https://google.github.io/adk-docs/)
